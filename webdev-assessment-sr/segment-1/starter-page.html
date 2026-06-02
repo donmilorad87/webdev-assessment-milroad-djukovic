@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Studio: AI Landing Page Builder | Search Atlas</title>
+  <meta name="description" content="Website Studio by Search Atlas is an AI landing page builder that turns a single prompt into a fully structured, SEO-ready, high-converting marketing page — ready to publish in minutes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #121212;
+      --bg: #000000;
+      --bg-alt: #0f0f0f;
+      --white: #ffffff;
+      --text-muted: rgba(255,255,255,0.6);
+      --text-dim: rgba(255,255,255,0.48);
+      --teal: #00ffd4;
+      --purple-hero: #a16eff;
+      --purple-link: #926bd9;
+      --purple-faq: #b88fff;
+      --card-border: rgba(170,133,236,0.48);
+      --card-border-light: rgba(170,133,236,0.24);
+      --card-bg: rgba(255,255,255,0.06);
+      --card-icon-border: rgba(255,255,255,0.12);
+      --divider: rgba(255,255,255,0.24);
+      --max-w: 1200px;
+      --section-pad: 120px 0;
+      --font: 'Inter Tight', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+      padding: 16px 120px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-logo {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--teal);
+      color: var(--black);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 10px 20px;
+      border-radius: 100px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 548px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      padding: 80px 20px;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 795px; height: 795px;
+      background: radial-gradient(circle, rgba(161,110,255,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -200px; left: -200px;
+      width: 795px; height: 795px;
+      background: radial-gradient(circle, rgba(0,255,212,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      padding: 16px 20px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 1000px;
+      overflow: hidden;
+    }
+    .hero-badge::before {
+      content: '';
+      position: absolute;
+      right: -105px; top: 28px;
+      width: 265px; height: 265px;
+      background: radial-gradient(circle, rgba(161,110,255,0.35) 0%, transparent 70%);
+    }
+    .hero-badge span {
+      position: relative;
+      font-size: 18px;
+      color: var(--white);
+    }
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: center;
+      text-align: center;
+    }
+    .hero-headline {
+      font-size: clamp(48px, 6vw, 88px);
+      font-weight: 400;
+      line-height: 1;
+      color: var(--white);
+    }
+    .hero-sub {
+      font-size: 24px;
+      line-height: 1.32;
+      color: var(--text-muted);
+      max-width: 994px;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--teal);
+      color: var(--black);
+      font-weight: 700;
+      font-size: 18px;
+      padding: 16px 20px;
+      border-radius: 100px;
+      text-decoration: none;
+      box-shadow: 0 0 0 4px rgba(0,255,212,0.04), 0 0 48px rgba(0,255,212,0.06);
+      white-space: nowrap;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: transparent;
+      color: var(--white);
+      font-size: 18px;
+      padding: 16px 20px;
+      border-radius: 1000px;
+      border: 1px solid var(--white);
+      text-decoration: none;
+      cursor: pointer;
+      height: 50px;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section { padding: var(--section-pad); }
+    .section-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ── TESTIMONIAL ── */
+    .testimonial {
+      padding: 80px 20px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      align-items: center;
+    }
+    .testimonial-quote {
+      font-size: clamp(24px, 3vw, 40px);
+      line-height: 1.2;
+      text-align: center;
+    }
+    .testimonial-quote .highlight { color: var(--purple-hero); }
+    .testimonial-author {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+    .testimonial-avatar {
+      width: 65px; height: 65px;
+      border-radius: 20px;
+      border: 1px solid var(--white);
+      overflow: hidden;
+      background: #000;
+    }
+    .testimonial-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .testimonial-name { font-size: 20px; font-weight: 400; }
+    .testimonial-title { font-size: 16px; color: var(--text-dim); margin-top: 6px; text-align: center; }
+
+    /* ── STATS CARDS ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .stat-card {
+      background: var(--bg);
+      border: 1px solid var(--card-border);
+      border-radius: 32px;
+      padding: 48px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: -60%; left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      height: 200%;
+      background: radial-gradient(ellipse at center top, rgba(0,100,255,0.25) 0%, rgba(100,0,255,0.2) 40%, transparent 70%);
+      pointer-events: none;
+    }
+    .stat-number {
+      font-size: 54px;
+      font-weight: 400;
+      color: var(--white);
+      position: relative;
+      font-variant-numeric: lining-nums proportional-nums;
+    }
+    .stat-label {
+      font-size: 18px;
+      line-height: 1.32;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      position: relative;
+    }
+
+    /* ── WHAT IS ── */
+    .what-is {
+      position: relative;
+      min-height: 834px;
+      padding: 120px 20px;
+      overflow: hidden;
+    }
+    .what-is-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      gap: 48px;
+      align-items: flex-end;
+    }
+    .what-is-left {
+      flex: 0 0 460px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .what-is-heading {
+      font-size: clamp(40px, 4.5vw, 64px);
+      font-weight: 400;
+      line-height: 1.1;
+    }
+    .what-is-body {
+      font-size: 18px;
+      line-height: 1.32;
+      color: #a9a9a9;
+    }
+    .what-is-body strong { color: var(--white); font-weight: 500; }
+    .what-is-image {
+      flex: 1;
+      border: 1px solid var(--purple-hero);
+      border-radius: 24px;
+      overflow: hidden;
+      height: 714px;
+      position: relative;
+    }
+    .what-is-image img { width: 100%; height: 100%; object-fit: cover; object-position: left top; }
+
+    /* ── SECTION HEADING ── */
+    .section-heading {
+      font-size: clamp(36px, 4.5vw, 64px);
+      font-weight: 400;
+      line-height: 1.1;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .section-heading .accent { color: var(--purple-hero); }
+    .section-subheading {
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.32;
+      color: var(--text-muted);
+      text-align: center;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    /* ── FEATURES GRID ── */
+    .features-header { margin-bottom: 48px; }
+    .features-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .features-row:last-child { margin-bottom: 0; }
+    .features-row.four-col { grid-template-columns: repeat(4, 1fr); }
+    .feature-item {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+    .feature-icon {
+      width: 120px; height: 120px;
+      border-radius: 48px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-icon-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+    .feature-text { display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; }
+    .feature-title { font-size: 20px; line-height: 1.1; color: var(--white); }
+    .feature-desc { font-size: 16px; line-height: 1.32; color: var(--text-muted); max-width: 380px; }
+
+    /* ── GETTING STARTED (steps) ── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .step-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border-light);
+      border-radius: 32px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: center;
+    }
+    .step-card-top {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      align-items: center;
+      width: 100%;
+    }
+    .step-num {
+      width: 64px; height: 64px;
+      border-radius: 1000px;
+      background: var(--purple-hero);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 500;
+      color: var(--black);
+      flex-shrink: 0;
+    }
+    .step-text {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      text-align: center;
+    }
+    .step-title { font-size: 24px; font-weight: 400; line-height: 1.1; color: var(--white); text-align: center; }
+    .step-desc { font-size: 16px; line-height: 1.32; color: var(--text-muted); text-align: center; }
+    .step-card .btn-primary { width: 100%; justify-content: center; }
+
+    /* ── COMPARISON TABLE ── */
+    .comparison-header { margin-bottom: 48px; }
+    .comparison-table {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      border-collapse: collapse;
+    }
+    .comparison-table th {
+      background: rgba(255,255,255,0.12);
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--white);
+      text-align: left;
+      white-space: nowrap;
+    }
+    .comparison-table th:first-child { border-radius: 12px 0 0 0; }
+    .comparison-table th:last-child { border-radius: 0 12px 0 0; }
+    .comparison-table td {
+      padding: 16px 24px;
+      font-size: 14px;
+      border-bottom: 1px solid var(--divider);
+      vertical-align: middle;
+    }
+    .comparison-table tr:nth-child(odd) td { background: var(--bg); }
+    .comparison-table tr:nth-child(even) td { background: var(--bg-alt); }
+    .comparison-table .feature-col { color: var(--white); font-size: 14px; line-height: 1.1; max-width: 180px; }
+    .comparison-table .ws-col { color: var(--white); display: flex; align-items: center; gap: 10px; font-size: 14px; white-space: nowrap; }
+    .comparison-table .other-col { color: var(--white); display: flex; align-items: center; gap: 6px; font-size: 12px; white-space: nowrap; }
+    .icon-check { color: #00c9a7; font-size: 14px; flex-shrink: 0; }
+    .icon-warn { color: #f0b429; font-size: 12px; flex-shrink: 0; }
+    .icon-x { color: #e53e3e; font-size: 12px; flex-shrink: 0; }
+    .td-flex { display: flex; align-items: center; gap: 8px; }
+
+    /* ── FAQ ── */
+    .faq-tabs {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+    .faq-tab {
+      padding: 12px 24px;
+      border-radius: 1000px;
+      border: 1px solid #bfbfbf;
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--white);
+      cursor: pointer;
+      background: transparent;
+      font-family: var(--font);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .faq-tab.active { border-color: var(--purple-faq); color: var(--purple-faq); }
+    .faq-list { display: flex; flex-direction: column; gap: 0; }
+    .faq-item {
+      border-bottom: 1px solid rgba(255,255,255,0.48);
+      padding-bottom: 48px;
+      margin-bottom: 48px;
+    }
+    .faq-item:last-child { border-bottom: none; margin-bottom: 0; }
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      cursor: pointer;
+      width: 100%;
+    }
+    .faq-question-text {
+      font-size: clamp(20px, 2.5vw, 32px);
+      font-weight: 400;
+      color: var(--white);
+    }
+    .faq-toggle {
+      width: 48px; height: 48px;
+      border-radius: 1000px;
+      border: 1px solid rgba(255,255,255,0.48);
+      background: transparent;
+      color: var(--white);
+      cursor: pointer;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      transition: background 0.2s;
+    }
+    .faq-toggle.open { background: linear-gradient(180deg, rgba(255,255,255,0.24) 0%, rgba(255,255,255,0.06) 100%); }
+    .faq-answer {
+      font-size: 24px;
+      line-height: 1.32;
+      color: var(--text-muted);
+      max-width: 1093px;
+      margin-top: 20px;
+      display: none;
+    }
+    .faq-item.open .faq-answer { display: block; }
+    .faq-item.open .faq-toggle { background: linear-gradient(180deg, rgba(255,255,255,0.24) 0%, rgba(255,255,255,0.06) 100%); }
+
+    /* ── FORM SECTION ── */
+    .form-section {
+      background: rgba(161,110,255,0.06);
+      border: 1px solid rgba(161,110,255,0.24);
+      border-radius: 32px;
+      padding: 56px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      align-items: center;
+      text-align: center;
+      margin-top: 48px;
+    }
+    .form-section-heading { font-size: clamp(28px, 3.5vw, 48px); font-weight: 400; line-height: 1.15; }
+    .form-section-sub { font-size: 18px; color: var(--text-muted); line-height: 1.5; max-width: 560px; }
+    #hubspot-form-target {
+      width: 100%;
+      max-width: 520px;
+      min-height: 80px;
+      background: rgba(255,255,255,0.04);
+      border: 1px dashed rgba(255,255,255,0.2);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 14px;
+      padding: 24px;
+    }
+
+    /* ── FOOTER ── */
+    footer { padding: 80px 0 0; }
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+    }
+    .footer-brand { flex: 0 0 250px; display: flex; flex-direction: column; gap: 24px; }
+    .footer-logo-text {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .footer-socials { display: flex; gap: 20px; }
+    .footer-social {
+      width: 46px; height: 46px;
+      border-radius: 1000px;
+      background: rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      text-decoration: none;
+      font-size: 18px;
+      transition: background 0.2s;
+    }
+    .footer-social:hover { background: rgba(255,255,255,0.16); }
+    .footer-cols { display: flex; gap: 51px; }
+    .footer-col { display: flex; flex-direction: column; gap: 20px; }
+    .footer-col-title { font-size: 14px; font-weight: 400; color: var(--purple-link); }
+    .footer-col-links { display: flex; flex-direction: column; gap: 15px; }
+    .footer-col-links a { font-size: 14px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+    .footer-col-links a:hover { color: var(--white); }
+    .footer-bottom {
+      margin-top: 60px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 24px 20px;
+      max-width: var(--max-w);
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      gap: 51px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .footer-copy { font-size: 14px; color: rgba(191,191,191,0.7); opacity: 0.7; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .nav { padding: 16px 40px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .features-row.four-col { grid-template-columns: repeat(2, 1fr); }
+      .what-is-inner { flex-direction: column; }
+      .what-is-left { flex: none; }
+      .what-is-image { height: 400px; }
+    }
+    @media (max-width: 768px) {
+      .nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .hero-ctas { flex-direction: column; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .features-row { grid-template-columns: 1fr; }
+      .features-row.four-col { grid-template-columns: repeat(2, 1fr); }
+      .steps-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; }
+      .footer-cols { flex-wrap: wrap; gap: 24px; }
+      .form-section { padding: 32px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Search<span style="color:var(--purple-link)">/</span>Atlas</a>
+  <ul class="nav-links">
+    <li><a href="#">Features</a></li>
+    <li><a href="#">Website Studio</a></li>
+    <li><a href="#">Pricing</a></li>
+    <li><a href="#">Resources</a></li>
+    <li><a href="#">Blog</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Generate Your Page Now</a>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-badge">
+    <span>AI Landing Page Builder</span>
+  </div>
+  <div class="hero-text">
+    <h1 class="hero-headline">Meet Website Studio</h1>
+    <p class="hero-sub">Generate high-converting landing pages with our AI Website Builder that turns a single prompt into a fully structured marketing page, ready to rank, go live, and perform instantly.</p>
+  </div>
+  <div class="hero-ctas">
+    <a href="#" class="btn-primary">Generate Your Page Now</a>
+    <a href="#" class="btn-secondary"><i class="fa-solid fa-play" style="font-size:16px"></i> Watch Demo</a>
+  </div>
+</section>
+
+<!-- ── TESTIMONIAL ── -->
+<section class="section">
+  <div class="testimonial">
+    <p class="testimonial-quote">
+      "Thank you for creating such an outstanding platform.&nbsp;<span class="highlight">Search Atlas has quickly become one of our go-to tools for SEO strategy, content development, and competitor analysis.</span>&nbsp;It's clear that a tremendous amount of thought and innovation has gone into building what I consider a truly next-generation SEO solution."
+    </p>
+    <div class="testimonial-author">
+      <div class="testimonial-avatar">
+        <img src="https://www.figma.com/api/mcp/asset/ab623ef9-9c59-4a81-b85e-2b112d5ce33f" alt="Bruce Beck, CEO at DB&amp;R">
+      </div>
+      <div style="text-align:center">
+        <div class="testimonial-name">Bruce Beck</div>
+        <div class="testimonial-title">CEO at DB&amp;R</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS ── -->
+<section class="section" style="padding-top:0">
+  <div class="section-inner">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-number">10X</span>
+        <span class="stat-label">Faster page production</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">90+</span>
+        <span class="stat-label">Lighthouse performance by default</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">Structured marketing pages, generated instantly</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">0</span>
+        <span class="stat-label">Developer dependency</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT IS WEBSITE STUDIO ── -->
+<section class="what-is">
+  <div class="what-is-inner">
+    <div class="what-is-left">
+      <h2 class="what-is-heading">What Is Website Studio?</h2>
+      <div class="what-is-body">
+        <p><strong>Website Studio</strong> by Search Atlas is an AI Landing Page Builder that automatically generates complete, conversion-ready landing pages. Pages are created, structured, and published from a single input, ready to rank, capture demand, and convert.</p>
+        <br>
+        <p>Website Studio fits directly into active marketing workflows, from campaign pages to client deliverables, moving from concept to live execution. Every page includes SEO-ready architecture, conversion-focused sections, tracking, form capture, and fast CDN delivery, without delays from templates, manual setup, or disconnected tools.</p>
+        <br>
+        <p>Marketers and agencies running at scale know exactly what they need — and the best AI website builder delivers it at every step. That's Website Studio.</p>
+      </div>
+      <a href="#" class="btn-primary" style="align-self:flex-start">Get Started Now</a>
+    </div>
+    <div class="what-is-image">
+      <img src="https://www.figma.com/api/mcp/asset/5afc0714-14d7-4e76-b237-850e4813ce12" alt="Website Studio's AI landing page builder interface">
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ── -->
+<section class="section" style="background:var(--bg)">
+  <div class="section-inner">
+    <div class="features-header">
+      <h2 class="section-heading">What Makes <span class="accent">Website Studio</span> the Best AI Landing Page Builder</h2>
+    </div>
+    <div class="features-row">
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fa-regular fa-keyboard"></i></div>
+        <div class="feature-text">
+          <div class="feature-title">Prompt-Based Page Creation</div>
+          <p class="feature-desc">Generate complete marketing pages from an input. Every page includes a hero, features, testimonials, and CTAs, fully structured — automatically.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fa-regular fa-copy"></i></div>
+        <div class="feature-text">
+          <div class="feature-title">Clone Website Mode</div>
+          <p class="feature-desc">Recreate the structure and visual style of any page. A ready-to-edit version accelerates redesigns, iterations, and production speed.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fa-solid fa-arrow-pointer"></i></div>
+        <div class="feature-text">
+          <div class="feature-title">PPC Landing Page Generator</div>
+          <p class="feature-desc">Create campaign-specific pages aligned with ad intent. Every page includes conversion elements, speed, and relevance signals required for performance.</p>
+        </div>
+      </div>
+    </div>
+    <div class="features-row four-col">
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+        <div class="feature-text">
+          <div class="feature-title">Static CDN Hosting</div>
+          <p class="feature-desc">Pages are published as static assets on a global CDN edge network. Fast load times and 90+ Lighthouse scores come built in by default.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fa-solid fa-sparkles"></i></div>
+        <div class="feature-text">
+          <div class="feature-title">AI Page Editing &amp; Iteration</div>
+          <p class="feature-desc">Update copy, layout, visuals, and sections through commands or visual controls. Faster testing cycles drive continuous performance gains.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fa-solid fa-i-cursor"></i></div>
+        <div class="feature-text">
+          <div class="feature-title">Lead Capture Forms</div>
+          <p class="feature-desc">Capture leads directly on every page with built-in forms. Structured inputs streamline follow-up and campaign workflows.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fa-solid fa-code"></i></div>
+        <div class="feature-text">
+          <div class="feature-title">Tracking Script Support</div>
+          <p class="feature-desc">Add GA4, Google Tag Manager, Meta Pixel, and custom scripts directly. Full analytics and retargeting run without code changes.</p>
+        </div>
+      </div>
+    </div>
+    <div class="features-row">
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fa-solid fa-globe"></i></div>
+        <div class="feature-text">
+          <div class="feature-title">Custom Domain &amp; Instant Publishing</div>
+          <p class="feature-desc">Connect domains and launch pages immediately. Full deployment control removes delays and external dependencies.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fa-regular fa-user"></i></div>
+        <div class="feature-text">
+          <div class="feature-title">Built for Marketers, Not Developers</div>
+          <p class="feature-desc">Every page is structured for conversion and SEO, with semantic HTML, optimized meta tags, and schema markup applied automatically.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fa-regular fa-id-card"></i></div>
+        <div class="feature-text">
+          <div class="feature-title">White-Label Website Builder for Agencies</div>
+          <p class="feature-desc">Create and deliver fully branded pages under your own name. Website Studio gives full ownership, faster production, and a scalable way to deliver client work.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── GETTING STARTED ── -->
+<section class="section">
+  <div class="section-inner">
+    <h2 class="section-heading">Getting Started with Website Studio AI Landing Page Builder</h2>
+    <p class="section-subheading">Start in Website Studio by describing the page you want to create. Once submitted, the landing page creator generates the full layout and sections, ready for editing and publishing in minutes.</p>
+    <div class="steps-grid">
+
+      <!-- Step 01 -->
+      <div class="step-card">
+        <div class="step-card-top">
+          <div class="step-num">01</div>
+          <div class="step-text">
+            <h3 class="step-title">Describe your page in a single prompt</h3>
+            <p class="step-desc">Describe your page in plain language — include your product, audience, location, style, colors, and key elements. Website Studio generates a complete page structure aligned with your intent.</p>
+          </div>
+        </div>
+        <a href="#" class="btn-primary">Get Started Now</a>
+      </div>
+
+      <!-- Step 02 -->
+      <div class="step-card">
+        <div class="step-card-top">
+          <div class="step-num">02</div>
+          <div class="step-text">
+            <h3 class="step-title">Edit with commands or visual controls</h3>
+            <p class="step-desc">Update copy, visuals, layout, or sections through commands or visual controls. Skip this step when the page already matches your campaign.</p>
+          </div>
+        </div>
+        <a href="#" class="btn-primary">Explore Editing Tools</a>
+      </div>
+
+      <!-- Step 03 -->
+      <div class="step-card">
+        <div class="step-card-top">
+          <div class="step-num">03</div>
+          <div class="step-text">
+            <h3 class="step-title">Publish and Launch instantly</h3>
+            <p class="step-desc">Connect your domain and go live on CDN-hosted pages with free SSL, tracking scripts, and lead capture already in place — no hosting setup or external tools required.</p>
+          </div>
+        </div>
+        <a href="#" class="btn-primary">Launch Your Page</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── COMPARISON TABLE ── -->
+<section class="section" style="background:var(--bg)">
+  <div class="section-inner">
+    <div class="comparison-header">
+      <h2 class="section-heading">Why Website Studio Outperforms Every Landing Page Builder</h2>
+      <p class="section-subheading" style="margin-top:12px">Traditional page builders require building pages step by step. Website Studio generates and launches pages in one flow, without the overhead of templates, setup, or tool switching.</p>
+    </div>
+    <div style="overflow-x:auto">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Website Studio</th>
+            <th>Wix ADI</th>
+            <th>Framer AI</th>
+            <th>Webflow</th>
+            <th>WordPress</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feature-col">Prompt-based page generation</td>
+            <td><div class="td-flex"><i class="fa-solid fa-check icon-check"></i> <span style="color:#fff;font-size:14px">Full page from one prompt</span></div></td>
+            <td><div class="td-flex"><i class="fa-solid fa-triangle-exclamation icon-warn"></i> Limited</div></td>
+            <td><div class="td-flex"><i class="fa-solid fa-triangle-exclamation icon-warn"></i> Partial</div></td>
+            <td><div class="td-flex"><i class="fa-solid fa-triangle-exclamation icon-warn"></i> Manual</div></td>
+            <td><div class="td-flex"><i class="fa-solid fa-xmark icon-x"></i> Manual</div></td>
+          </tr>
+          <tr>
+            <td class="feature-col">Static CDN hosting included</td>
+            <td><div class="td-flex"><i class="fa-solid fa-check icon-check"></i> <span style="color:#fff;font-size:14px">Built-in</span></div></td>
+            <td><div class="td-flex"><i class="fa-solid fa-xmark icon-x"></i> Separate plan</div></td>
+            <td><div class="td-flex"><i class="fa-solid fa-triangle-exclamation icon-warn"></i> Paid tier</div></td>
+            <td><div class="td-flex"><i class="fa-solid fa-xmark icon-x"></i> Separate</div></td>
+            <td><div class="td-flex"><i class="fa-solid fa-xmark icon-x"></i> Separate</div></td>
+          </tr>
+          <tr>
+            <td class="feature-col">SEO-ready structure</td>
+            <td><div class="td-flex"><i class="fa-solid fa-check icon-check"></i> <span style="color:#fff;font-size:14px">Meta, schema, semantic HTML</span></div></td>
+            <td><div class="td-flex"><i class="fa-solid fa-triangle-exclamation icon-warn"></i> Basic</div></td>
+            <td><div class="td-flex"><i class="fa-solid fa-triangle-exclamation icon-warn"></i> Limited</div></td>
+            <td><div class="td-flex"><i class="fa-solid fa-xmark icon-x"></i> Manual setup</div></td>
+            <td><div class="td-flex"><i class="fa-solid fa-xmark icon-x"></i> Plugin-dependent</div></td>
+          </tr>
+          <tr>
+            <td class="feature-col">White-label website builder</td>
+            <td><div class="td-flex"><i class="fa-solid fa-check icon-check"></i> <span style="color:#fff;font-size:14px">Full branding control</span></div></td>
+            <td><div class="td-flex"><i class="fa-solid fa-xmark icon-x"></i> Not supported</div></td>
+            <td><div class="td-flex"><i class="fa-solid fa-xmark icon-x"></i> Not supported</div></td>
+            <td><div class="td-flex"><i class="fa-solid fa-triangle-exclamation icon-warn"></i> Limited</div></td>
+            <td><div class="td-flex"><i class="fa-solid fa-triangle-exclamation icon-warn"></i> Plugin-dependent</div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="section">
+  <div class="section-inner">
+    <h2 class="section-heading" style="margin-bottom:48px">Frequently Asked Questions</h2>
+    <div class="faq-tabs">
+      <button class="faq-tab active" onclick="setTab(this)">General</button>
+      <button class="faq-tab" onclick="setTab(this)">Capabilities</button>
+      <button class="faq-tab" onclick="setTab(this)">Pricing &amp; Trust</button>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <h3 class="faq-question-text">What is an AI landing page builder?</h3>
+          <button class="faq-toggle open" aria-label="Toggle">&#8722;</button>
+        </div>
+        <p class="faq-answer">An AI landing page builder is software that creates landing pages using artificial intelligence instead of manual design or templates. Website Studio applies this by generating page structure, layout, and content from a prompt.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <h3 class="faq-question-text">How does an AI landing page builder work?</h3>
+          <button class="faq-toggle" aria-label="Toggle">&#43;</button>
+        </div>
+        <p class="faq-answer">Website Studio's AI analyzes your prompt to understand your business, audience, and goals, then generates a complete page structure with hero sections, feature blocks, testimonials, CTAs, and more — all optimized for conversion and SEO.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <h3 class="faq-question-text">Who is Website Studio built for?</h3>
+          <button class="faq-toggle" aria-label="Toggle">&#43;</button>
+        </div>
+        <p class="faq-answer">Website Studio is built for marketers, agencies, and growth teams who need to create and launch high-performing landing pages at scale — without needing developers or design tools.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <h3 class="faq-question-text">Do I need coding experience to use Website Studio?</h3>
+          <button class="faq-toggle" aria-label="Toggle">&#43;</button>
+        </div>
+        <p class="faq-answer">No coding is required. Website Studio is designed for marketers and non-technical users. You describe what you need in plain language, and the AI handles the rest — from page structure to publishing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FORM SECTION ── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="form-section">
+      <h2 class="form-section-heading">Ready to Build Your First Page?</h2>
+      <p class="form-section-sub">Enter your details and our team will show you how Website Studio can accelerate your marketing.</p>
+      <!-- HubSpot injects the rendered form into this target (see embed script before </body>). -->
+      <div id="hubspot-form-target"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="footer-logo-text">Search<span style="color:var(--purple-link)">/</span>Atlas</a>
+      <div class="footer-socials">
+        <a href="#" class="footer-social" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" class="footer-social" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" class="footer-social" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      </div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <span class="footer-col-title">Features</span>
+        <div class="footer-col-links">
+          <a href="#">OTTO SEO</a>
+          <a href="#">Local SEO Software</a>
+          <a href="#">Site Explorer</a>
+          <a href="#">Keyword Researcher</a>
+          <a href="#">SEO Content Assistant</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title">Resources</span>
+        <div class="footer-col-links">
+          <a href="#">Help Center</a>
+          <a href="#">Pricing</a>
+          <a href="#">Blog</a>
+          <a href="#">Tutorials</a>
+          <a href="#">Customer Support</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© All copyrights reserved, Search Atlas 2025.</span>
+    <a href="#" style="font-size:14px;color:var(--purple-link);text-decoration:underline">Terms of Service</a>
+    <a href="#" style="font-size:14px;color:var(--purple-link);text-decoration:underline">Privacy Policy</a>
+  </div>
+</footer>
+
+<script>
+  // FAQ accordion
+  function toggleFaq(el) {
+    const item = el.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      const btn = i.querySelector('.faq-toggle');
+      btn.textContent = '+';
+      btn.classList.remove('open');
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      const btn = item.querySelector('.faq-toggle');
+      btn.innerHTML = '&#8722;';
+      btn.classList.add('open');
+    }
+  }
+
+  function setTab(btn) {
+    document.querySelectorAll('.faq-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+</script>
+
+<!-- ── HubSpot form embed (Task C) ── -->
+<!-- v2.js is HubSpot's form loader. It's a blocking script so `hbspt` is defined
+     before the inline script below runs. portalId / formId are placeholders —
+     swap in the real Hub ID and form GUID from your HubSpot portal. -->
+<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+<script>
+  // Declare the GTM dataLayer before any push so no events are dropped.
+  window.dataLayer = window.dataLayer || [];
+
+  hbspt.forms.create({
+    region: "na1",                                    // HubSpot account region (na1 / eu1 / etc.)
+    portalId: "00000000",                             // placeholder — replace with real Hub ID
+    formId: "00000000-0000-0000-0000-000000000000",   // placeholder — replace with real form GUID
+    target: "#hubspot-form-target",
+
+    // onFormSubmitted fires ONLY after HubSpot has validated and accepted the
+    // submission — i.e. a real conversion. We forward that as a custom dataLayer
+    // event so GTM can fire GA4 / Ads conversion tags off a reliable signal.
+    onFormSubmitted: function ($form, data) {
+      window.dataLayer.push({
+        event: 'hubspot_form_submit',                 // GTM Custom Event trigger listens for this name
+        form_name: 'Website Studio Demo Request',
+        form_id: '00000000-0000-0000-0000-000000000000'
+      });
+    }
+  });
+</script>
+</body>
+</html>

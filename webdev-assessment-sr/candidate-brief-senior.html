@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webdev Assessment — Senior</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a; --white: #fff; --teal: #00ffd4; --purple: #a16eff; --purple-light: #c8a9ff;
+      --muted: rgba(255,255,255,0.6); --dim: rgba(255,255,255,0.36);
+      --border: rgba(255,255,255,0.1); --card: rgba(255,255,255,0.05);
+      --font: 'Inter Tight', sans-serif;
+    }
+    body { font-family: var(--font); background: var(--bg); color: var(--white); -webkit-font-smoothing: antialiased; line-height: 1.5; max-width: 740px; margin: 0 auto; padding: 64px 32px; }
+
+    .level-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(161,110,255,0.1); border: 1px solid rgba(161,110,255,0.25); border-radius: 100px; padding: 6px 16px; margin-bottom: 24px; }
+    .level-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--purple); }
+    .level-text { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple); }
+
+    h1 { font-size: 40px; font-weight: 400; line-height: 1.1; margin-bottom: 16px; }
+    .intro { font-size: 16px; color: var(--muted); line-height: 1.6; margin-bottom: 40px; }
+    .intro strong { color: var(--white); }
+
+    .timer-strip { display: flex; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 48px; }
+    .timer-cell { flex: 1; padding: 16px 20px; border-right: 1px solid var(--border); display: flex; flex-direction: column; gap: 4px; }
+    .timer-cell:last-child { border-right: none; }
+    .timer-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); }
+    .timer-value { font-size: 22px; font-weight: 400; }
+    .timer-value.teal { color: var(--teal); }
+    .timer-value.purple { color: var(--purple); }
+
+    .cc-note { background: rgba(0,255,212,0.05); border: 1px solid rgba(0,255,212,0.18); border-radius: 14px; padding: 20px 24px; margin-bottom: 40px; }
+    .cc-note-title { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; }
+    .cc-note p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .cc-note p strong { color: var(--white); }
+
+    .rules { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 14px; padding: 24px; margin-bottom: 48px; }
+    .rules h3 { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+    .rules ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .rules li { font-size: 14px; color: var(--muted); padding-left: 20px; position: relative; line-height: 1.5; }
+    .rules li::before { content: '→'; position: absolute; left: 0; color: var(--teal); }
+    .rules li strong { color: var(--white); }
+
+    .file-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 48px; }
+    .file-row { display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; }
+    .file-row-name { font-family: monospace; font-size: 13px; color: var(--teal); white-space: nowrap; }
+    .file-row-desc { color: var(--muted); }
+
+    .task { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 24px; margin-bottom: 16px; }
+    .task-head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .task-letter { width: 32px; height: 32px; border-radius: 50%; background: var(--teal); color: #000; font-weight: 700; font-size: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .task-letter.purple { background: var(--purple); color: #000; }
+    .task-name { font-size: 16px; font-weight: 500; }
+    .task-est { margin-left: auto; font-size: 12px; color: var(--teal); font-weight: 600; }
+    .task-est.purple { color: var(--purple-light); }
+    .task-body { font-size: 14px; color: var(--muted); line-height: 1.6; display: flex; flex-direction: column; gap: 10px; }
+    .task-body strong { color: var(--white); }
+    .task-body code { font-family: 'SF Mono', monospace; font-size: 12px; background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 4px; color: var(--purple-light); }
+
+    .divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    .segment-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-bottom: 8px; }
+    .seg1-tag { background: rgba(0,255,212,0.1); color: var(--teal); }
+    .seg2-tag { background: rgba(161,110,255,0.12); color: var(--purple); }
+    .segment-time { font-size: 13px; color: var(--dim); margin-left: 10px; }
+    h2 { font-size: 24px; font-weight: 400; margin-bottom: 12px; }
+    .segment-intro { font-size: 15px; color: var(--muted); line-height: 1.6; margin-bottom: 24px; }
+  </style>
+</head>
+<body>
+
+  <div class="level-badge"><div class="level-dot"></div><div class="level-text">Senior Track</div></div>
+  <h1>Let's see how you work.</h1>
+  <p class="intro">
+    This is a <strong>1-hour practical session</strong> across two segments. We're not waiting for a polished finished product — we want to see how you think, prioritize, communicate under time pressure, and use Claude Code like a real workday tool.
+  </p>
+
+  <div class="timer-strip">
+    <div class="timer-cell">
+      <div class="timer-label">Total Time</div>
+      <div class="timer-value teal">60 min</div>
+    </div>
+    <div class="timer-cell">
+      <div class="timer-label">Segment 1</div>
+      <div class="timer-value teal">40 min</div>
+    </div>
+    <div class="timer-cell">
+      <div class="timer-label">Segment 2</div>
+      <div class="timer-value purple">20 min</div>
+    </div>
+  </div>
+
+  <div class="cc-note">
+    <div class="cc-note-title">Claude Code is required — and expected</div>
+    <p>Use Claude Code throughout both segments. We're watching <strong>how you work with it</strong> — how you prompt, how you verify output, and how you iterate. Give Claude Code context before you generate. Review its output before you use it. We'll ask follow-up questions about choices you made.</p>
+  </div>
+
+  <div class="rules">
+    <h3>Ground Rules</h3>
+    <ul>
+      <li><strong>Think out loud.</strong> Narrate your reasoning — especially when you accept or reject Claude Code output.</li>
+      <li><strong>Use any tool you'd normally use</strong> — Claude Code, DevTools, Lighthouse, browser inspector. No restrictions.</li>
+      <li><strong>Time will be called at 40 min</strong> to move from Segment 1 to Segment 2 — regardless of where you are.</li>
+      <li>No real HubSpot portal ID needed for Task C — pseudocode or a walkthrough is fine.</li>
+      <li>Segment 2 has no prep time. That's intentional.</li>
+    </ul>
+  </div>
+
+  <h2 style="margin-bottom:12px">Your files</h2>
+  <div class="file-list">
+    <div class="file-row">
+      <div class="file-row-name">starter-page.html</div>
+      <div class="file-row-desc">The partially built page you'll be working on in Segment 1.</div>
+    </div>
+    <div class="file-row">
+      <div class="file-row-name">figma-spec-section.html</div>
+      <div class="file-row-desc">Design reference for Task A — your interviewer will tell you when to open this.</div>
+    </div>
+  </div>
+
+  <!-- SEGMENT 1 -->
+  <span class="segment-tag seg1-tag">Segment 1</span><span class="segment-time">40 minutes · 3 tasks</span>
+  <h2>Practical Build with Claude Code</h2>
+  <p class="segment-intro">You're working on a landing page for Website Studio — Search Atlas's AI page builder. It's partially complete. Work through all three tasks in order, use Claude Code throughout, and talk through what you're doing and why.</p>
+
+  <div class="task">
+    <div class="task-head">
+      <div class="task-letter">A</div>
+      <div class="task-name">Match the Figma section</div>
+      <div class="task-est">~15 min</div>
+    </div>
+    <div class="task-body">
+      <p>The "Getting Started" section is missing from <code>starter-page.html</code>. There's a <code>&lt;!-- SECTION PLACEHOLDER: Getting Started --&gt;</code> comment where it should go.</p>
+      <p>Use <code>figma-spec-section.html</code> as your design reference and build the section in using Claude Code. <strong>Before prompting Claude Code to generate anything</strong>, share the existing stylesheet with it — the CSS you need is already there.</p>
+    </div>
+  </div>
+
+  <div class="task">
+    <div class="task-head">
+      <div class="task-letter">B</div>
+      <div class="task-name">Fix heading hierarchy &amp; SEO structure</div>
+      <div class="task-est">~13 min</div>
+    </div>
+    <div class="task-body">
+      <p>Audit <code>starter-page.html</code> for heading hierarchy and SEO issues. Use Claude Code to help surface them. Fix everything you find and walk through your reasoning as you go — what's broken, why it matters, and what you changed.</p>
+      <p>Check the <code>&lt;head&gt;</code> as well as the page structure.</p>
+    </div>
+  </div>
+
+  <div class="task">
+    <div class="task-head">
+      <div class="task-letter">C</div>
+      <div class="task-name">Integrate a form + explain GTM tracking</div>
+      <div class="task-est">~12 min</div>
+    </div>
+    <div class="task-body">
+      <p>There's a <code>&lt;div id="hubspot-form-target"&gt;</code> placeholder in the page. Use Claude Code to generate the HubSpot embed snippet and drop it in. Placeholder IDs are fine.</p>
+      <p>Then walk through how you'd set up GTM to track a form submission — the specific trigger type, the DataLayer push, and why you'd choose that approach over a generic form submit listener.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SEGMENT 2 -->
+  <span class="segment-tag seg2-tag">Segment 2</span><span class="segment-time">20 minutes — no prep</span>
+  <h2>Performance Debugging</h2>
+  <p class="segment-intro">We'll hand you a live staging URL right now. Open it in Chrome, run whatever diagnostics you'd normally reach for, and walk us through what you find. We want root cause, user-visible impact, and how you'd prioritize fixes — not a comprehensive checklist.</p>
+
+  <div class="task">
+    <div class="task-head">
+      <div class="task-letter purple">→</div>
+      <div class="task-name">Diagnose, explain, prioritize</div>
+      <div class="task-est purple">20 min</div>
+    </div>
+    <div class="task-body">
+      <p>Use DevTools, Lighthouse, or any tool you'd reach for on a real project. As you find issues, narrate: <strong>what it is</strong>, <strong>why it's happening</strong>, and <strong>what you'd fix first and why</strong>.</p>
+      <p>We're more interested in how you think about impact and trade-offs between quick wins and structural changes than a comprehensive list of everything wrong.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SUBMISSION -->
+  <span class="segment-tag" style="background:rgba(161,110,255,0.12);color:var(--purple)">When You're Done</span>
+  <h2 style="margin-top:8px">How to Submit</h2>
+  <p class="segment-intro">Once your session is complete, send back two things: your screen recording and your code in a repo named after you.</p>
+
+  <div class="task">
+    <div class="task-head">
+      <div class="task-letter purple">1</div>
+      <div class="task-name">Create a repo with your name</div>
+    </div>
+    <div class="task-body">
+      <p>Go to <strong>github.com</strong> or <strong>gitlab.com</strong> (whichever you use) and create a new repository named:</p>
+      <p><code>webdev-assessment-firstname-lastname</code></p>
+      <p>Example: <code>webdev-assessment-jane-doe</code></p>
+      <p>Set it to <strong>Public</strong> so we can view it without needing access.</p>
+    </div>
+  </div>
+
+  <div class="task">
+    <div class="task-head">
+      <div class="task-letter purple">2</div>
+      <div class="task-name">Push your working files</div>
+    </div>
+    <div class="task-body">
+      <p>From inside your assessment folder, run:</p>
+      <p><code>git init</code><br>
+      <code>git add .</code><br>
+      <code>git commit -m "webdev assessment submission"</code><br>
+      <code>git remote add origin YOUR_REPO_URL</code><br>
+      <code>git push -u origin main</code></p>
+      <p>Push all the files you worked on — including the ones you didn't change. We want to see the full picture.</p>
+    </div>
+  </div>
+
+  <div class="task">
+    <div class="task-head">
+      <div class="task-letter purple">3</div>
+      <div class="task-name">Send both links to your recruiter</div>
+    </div>
+    <div class="task-body">
+      <p>Reply to your recruiter's email with:</p>
+      <p>✓ <strong>Your repo link</strong> (e.g. github.com/janedoe/webdev-assessment-jane-doe)<br>
+      ✓ <strong>Your screen recording</strong> — upload to Google Drive, Loom, or any sharing link and include the URL</p>
+    </div>
+  </div>
+
+</body>
+</html>
