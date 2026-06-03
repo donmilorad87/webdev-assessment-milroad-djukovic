@@ -160,5 +160,5 @@ Comparison table · FAQ accordion · HubSpot form · Footer.
 
 ## Author
 
-**Milorad Djukovic** — Senior Webdev Assessment
+**Milorad Djukovic** and **Claude Code**
 Repo: https://github.com/donmilorad87/webdev-assessment-milroad-djukovic
