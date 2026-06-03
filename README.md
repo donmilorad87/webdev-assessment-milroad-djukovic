@@ -19,7 +19,7 @@ served by a small, production-shaped **Docker** stack (nginx in front of PHP-FPM
 ## Repository layout
 
 ```
-attest/                              ← repo root (this README)
+│                                    ← repo root (this README)
 ├── docker-compose.yml               ← orchestrates the two services
 ├── .env                             ← host UID/GID for non-root file ownership
 ├── docker/
